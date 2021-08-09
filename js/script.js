@@ -20,17 +20,34 @@ const createSnake = () => {
     }
 }
 
+const update = (event) => {
+
+    if (event.keyCode == 37 && snakeDirection != 'right') {snakeDirection = 'left'};
+    if (event.keyCode == 38 && snakeDirection != 'down') {snakeDirection = 'up'};
+    if (event.keyCode == 39 && snakeDirection != 'left') {snakeDirection = 'right'};
+    if (event.keyCode == 40 && snakeDirection != 'up') {snakeDirection = 'down'};
+
+}
+
+document.addEventListener('keydown', update);
+
 const initGame = () => {
+
+    if (snake[0].x > 15 * box && snakeDirection == 'right') {snake[0].x = 0};
+    if (snake[0].x < 0 && snakeDirection == 'left') {snake[0].x = 15 * box};
+    if (snake[0].y > 15 * box && snakeDirection == 'down') {snake[0].y = 0};
+    if (snake[0].y < 0 && snakeDirection == 'up') {snake[0].y = 15 * box};
+
     createBG(); 
     createSnake();
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
-    if (snakeDirection == 'right') snakeX += box;
-    if (snakeDirection == 'left') snakeX -= box;
-    if (snakeDirection == 'up') snakeY -= box;
-    if (snakeDirection == 'down') snakeY += box;
+    if (snakeDirection == 'right') {snakeX += box};
+    if (snakeDirection == 'left') {snakeX -= box};
+    if (snakeDirection == 'up') {snakeY -= box};
+    if (snakeDirection == 'down') {snakeY += box};
 
     snake.pop();
 
